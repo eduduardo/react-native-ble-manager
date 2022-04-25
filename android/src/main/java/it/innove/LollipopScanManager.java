@@ -62,6 +62,11 @@ public class LollipopScanManager extends ScanManager {
                 Log.d(bleManager.LOG_TAG, "Filter service: " + serviceUUIDs.getString(i));
             }
         }
+	
+	if(options.hasKey("deviceAddress")) {
+            ScanFilter filter = new ScanFilter.Builder().setDeviceAddress(options.getString("deviceAddress")).build();
+            filters.add(filter);
+        }
         
         getBluetoothAdapter().getBluetoothLeScanner().startScan(filters, scanSettingsBuilder.build(), mScanCallback);
         if (scanSeconds > 0) {
